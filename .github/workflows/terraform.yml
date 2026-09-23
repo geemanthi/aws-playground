@@ -20,9 +20,6 @@ permissions:
 env:
   TF_LOG: ERROR
   TF_WORKING_DIR: infrastructure
-  AWS_TFSTATE_BUCKET: ${{ secrets.AWS_TFSTATE_BUCKET }}
-  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
   PRODUCT: testing
   SERVICE: infrastructure-core
   ENVIRONMENT: dev
@@ -40,10 +37,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: ${AWS_ROLE_ARN }
-          aws-region: ${AWS_DEFAULT_REGION}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-session-name: github-actions-terraform
      
       - name: Sts GetCallerIdentity
@@ -66,7 +63,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          terraform init -backend-config="bucket=${AWS_TFSTATE_BUCKET}" -backend-config="key=$PRODUCT/$SERVICE/${{ env.ENVIRONMENT }}/terraform.tfstate" -backend-config="region=${AWS_DEFAULT_REGION}"
+          terraform init -backend-config="bucket=${{ secrets.AWS_TFSTATE_BUCKET }}" -backend-config="key=$PRODUCT/$SERVICE/${{ env.ENVIRONMENT }}/terraform.tfstate" -backend-config="region=${{ secrets.AWS_DEFAULT_REGION }}"
           terraform plan -var-file=${{ env.ENVIRONMENT }}.tfvars -var "env=${{ env.ENVIRONMENT }}" -out=${{ env.ENVIRONMENT }}.tfplan
 
       # - uses: actions/github-script@v6
