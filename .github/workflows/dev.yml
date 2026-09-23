@@ -2,19 +2,23 @@ name: "Deploy Dev"
 
 on:
   push:
-    # branches: [main]
+    branches:
+      - main
+      - geemanthi-github-branch
     paths:
       - "infrastructure/**"
+      - ".github/workflows/**"
   pull_request:
     paths:
       - "infrastructure/**"
+      - ".github/workflows/**"
 
 jobs:
   dev:
     uses: ./terraform-ci-template.yml
     with:
       environment: dev
-      aws_region: ${{ secrets.DEV_AWS_REGION }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
     secrets:
-      AWS_ROLE_ARN: ${{ secrets.DEV_AWS_ROLE_ARN }}
-      AWS_TFSTATE_BUCKET: ${{ secrets.DEV_AWS_TFSTATE_BUCKET }}
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+      AWS_TFSTATE_BUCKET: ${{ secrets.AWS_TFSTATE_BUCKET }}
