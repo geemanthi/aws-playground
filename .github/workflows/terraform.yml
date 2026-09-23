@@ -43,7 +43,7 @@ jobs:
           # role-session-name: github-actions-terraform
           role-to-assume: arn:aws:iam::699619102999:role/IAMAutomation
           aws-region: us-east-1
-          role-session-name: github-actions-terraform
+          # role-session-name: github-actions-terraform
      
       - name: Sts GetCallerIdentity
         run: aws sts get-caller-identity
