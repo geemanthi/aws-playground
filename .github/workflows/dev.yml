@@ -15,7 +15,7 @@ on:
 
 jobs:
   dev:
-    uses: ./terraform-ci-template.yml
+    uses: ./.github/workflows/terraform-ci-template.yml
     with:
       environment: dev
     secrets:
