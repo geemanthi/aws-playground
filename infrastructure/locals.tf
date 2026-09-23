@@ -13,5 +13,5 @@ locals {
   }
 
   aws_session_name = "aws-playground"
-
+  name_suffix     = "${lower(var.region_code)}-${lower(var.organization)}-${lower(var.env)}-${lower(var.project)}"
 }
