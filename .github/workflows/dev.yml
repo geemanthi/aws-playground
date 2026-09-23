@@ -15,7 +15,6 @@ jobs:
     with:
       environment: dev
       aws_region: ${{ secrets.DEV_AWS_REGION }}
-      apply: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
     secrets:
       AWS_ROLE_ARN: ${{ secrets.DEV_AWS_ROLE_ARN }}
       AWS_TFSTATE_BUCKET: ${{ secrets.DEV_AWS_TFSTATE_BUCKET }}
