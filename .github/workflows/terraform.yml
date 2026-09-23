@@ -19,7 +19,6 @@ permissions:
 
 env:
   TF_LOG: ERROR
-  TF_WORKING_DIR: infrastructure
   PRODUCT: testing
   SERVICE: infrastructure-core
   ENVIRONMENT: dev
@@ -39,8 +38,11 @@ jobs:
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          # role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          # aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          # role-session-name: github-actions-terraform
+          role-to-assume: arn:aws:iam::699619102999:role/IAMAutomation
+          aws-region: us-east-1
           role-session-name: github-actions-terraform
      
       - name: Sts GetCallerIdentity
