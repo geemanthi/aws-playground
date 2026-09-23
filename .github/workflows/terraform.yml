@@ -59,15 +59,15 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run:
-          - terraform init -backend=false
-          - terraform validate
+        run: |
+          terraform init -backend=false
+          terraform validate
 
       - name: Terraform Plan
         id: plan
-        run: 
-          - terraform init -backend-config="bucket=${AWS_TFSTATE_BUCKET}" -backend-config="key=$PRODUCT/$SERVICE/${{ env.ENVIRONMENT }}/terraform.tfstate" -backend-config="region=${AWS_DEFAULT_REGION}"
-          - terraform plan -var-file=${{ env.ENVIRONMENT }}.tfvars -var "env=${{ env.ENVIRONMENT }}" -out=${{ env.ENVIRONMENT }}.tfplan
+        run: |
+          terraform init -backend-config="bucket=${AWS_TFSTATE_BUCKET}" -backend-config="key=$PRODUCT/$SERVICE/${{ env.ENVIRONMENT }}/terraform.tfstate" -backend-config="region=${AWS_DEFAULT_REGION}"
+          terraform plan -var-file=${{ env.ENVIRONMENT }}.tfvars -var "env=${{ env.ENVIRONMENT }}" -out=${{ env.ENVIRONMENT }}.tfplan
 
       # - uses: actions/github-script@v6
       #   if: github.event_name == 'pull_request'
