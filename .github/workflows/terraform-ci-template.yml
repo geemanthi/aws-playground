@@ -67,7 +67,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ inputs.AWS_DEFAULT_REGION }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-session-name: github-actions-terraform
 
       - run: aws sts get-caller-identity
@@ -79,7 +79,7 @@ jobs:
           terraform init \
             -backend-config="bucket=${{ secrets.AWS_TFSTATE_BUCKET }}" \
             -backend-config="key=$PRODUCT/$SERVICE/${{ inputs.environment }}/terraform.tfstate" \
-            -backend-config="region=${{ inputs.AWS_DEFAULT_REGION }}"
+            -backend-config="region=${{ secrets.AWS_DEFAULT_REGION }}"
 
       - name: Terraform Plan
         run: |
@@ -118,7 +118,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ inputs.AWS_DEFAULT_REGION }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-session-name: github-actions-terraform
 
       - run: aws sts get-caller-identity
@@ -130,7 +130,7 @@ jobs:
           terraform init \
             -backend-config="bucket=${{ secrets.AWS_TFSTATE_BUCKET }}" \
             -backend-config="key=$PRODUCT/$SERVICE/${{ inputs.environment }}/terraform.tfstate" \
-            -backend-config="region=${{ inputs.AWS_DEFAULT_REGION }}"
+            -backend-config="region=${{ secrets.AWS_DEFAULT_REGION }}"
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
