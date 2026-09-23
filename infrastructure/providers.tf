@@ -13,7 +13,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    dynamodb_table = "terraform-lock-state"
+    use_lockfile = true
   }
 }
 
