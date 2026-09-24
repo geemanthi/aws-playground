@@ -32,8 +32,3 @@ variable "public_subnets" {
     type        = map(string)
     description = "A map of public subnets with availability zones as keys and CIDR blocks as values"
 }
-
-variable "enable_vpc_flow_logs" {
-    type        = bool
-    description = "Whether to enable VPC flow logs"
-}
