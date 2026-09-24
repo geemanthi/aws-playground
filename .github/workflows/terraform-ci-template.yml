@@ -139,8 +139,7 @@ jobs:
             -backend-config="region=${{ secrets.AWS_DEFAULT_REGION }}"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var-file=${{ inputs.environment }}.tfvars \
-            -var "env=${{ inputs.environment }}" tfplan 
+        run: terraform apply -auto-approve tfplan 
 
   destroy:
     name: destroy
