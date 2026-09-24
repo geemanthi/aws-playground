@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - geemanthi-github-branch
+      - docker-branch
     paths:
       - "infrastructure/**"
       - ".github/workflows/**"
@@ -16,6 +16,7 @@ on:
 permissions:
   id-token: write
   contents: read
+  packages: write
 
 jobs:
   dev:
@@ -23,6 +24,7 @@ jobs:
     with:
       environment: dev
       apply: true
+      build: true
     secrets:
       AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
       AWS_TFSTATE_BUCKET: ${{ secrets.AWS_TFSTATE_BUCKET }}
