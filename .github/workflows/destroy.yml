@@ -34,7 +34,6 @@ jobs:
   destroy:
     name: destroy-${{ inputs.environment }}
     needs: check-confirmation
-    environment: ${{ inputs.environment }}
     uses: ./.github/workflows/terraform-ci-template.yml
     with:
       environment: ${{ inputs.environment }}
