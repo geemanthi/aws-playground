@@ -33,6 +33,7 @@ on:
 permissions:
   id-token: write
   contents: read
+  packages: write
 
 env:
   TF_LOG: ERROR
