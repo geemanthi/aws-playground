@@ -12,11 +12,6 @@ on:
         required: false
         type: boolean
         default: false
-      destroy:
-        description: "Whether to run destroy instead of apply"
-        required: false
-        type: boolean
-        default: false
       apply:
         description: "Whether to run apply after plan"
         required: false
