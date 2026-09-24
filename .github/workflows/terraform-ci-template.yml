@@ -140,8 +140,7 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var-file=${{ inputs.environment }}.tfvars \
-            -var "env=${{ inputs.environment }}" \
-            -state tfplan 
+            -var "env=${{ inputs.environment }}" tfplan 
 
   destroy:
     name: destroy
